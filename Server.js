@@ -4,6 +4,7 @@ const app = express()
 const cors = require("cors")
 const corsOption = require("./DB/corsOption")
 const mongoconnect = require("./DB/MongoDb")
+const auth = require("./Routes/auth")
 const {logger } = require("./Middleware/logEvents")
 const errorHandler = require("./Middleware/errorHandler")
 
@@ -20,6 +21,7 @@ app.use(logger)
 app.get("/", (req, res) => {
     res.json({Message:"Kilimani Hub Backend Server."});
 });
+app.use("/api/v1", auth) //auth route
 
 //Error handler
 app.use(errorHandler)
