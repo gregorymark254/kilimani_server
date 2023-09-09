@@ -20,3 +20,7 @@
 20230909	14:41:06	fd0f978b-6541-42a3-ae99-86ccc8847aa6	GET	undefined	/api/v1/users
 20230909	14:41:30	846d03f0-951e-4fbb-be48-c6ea8592001a	GET	undefined	/api/v1/users
 20230909	14:41:44	90d743e9-849b-4ac8-bb84-4503557932a4	POST	undefined	/api/v1/login
+20230909	15:04:28	0bd8630c-f7ce-427f-aae5-cdcab76f8b45	GET	undefined	/
+20230909	15:08:09	3d2f1c36-ea85-41d9-91aa-bdbfd9d953e1	POST	http://localhost:3000	/api/v1/register
+20230909	15:08:35	2ecbf4ef-e9cb-43c6-9355-362c2a69866d	GET	undefined	/api/v1/users
+20230909	15:20:26	df1cfc0c-d3c0-48e3-8e8f-3a2539deb6c2	POST	http://localhost:3000	/api/v1/login
