@@ -5,6 +5,7 @@ const cors = require("cors")
 const corsOption = require("./DB/corsOption")
 const mongoconnect = require("./DB/MongoDb")
 const auth = require("./Routes/auth")
+const blog = require("./Routes/blogRoute")
 const {logger } = require("./Middleware/logEvents")
 const errorHandler = require("./Middleware/errorHandler")
 
@@ -22,6 +23,7 @@ app.get("/", (req, res) => {
     res.json({Message:"Kilimani Hub Backend Server."});
 });
 app.use("/api/v1", auth) //auth route
+app.use("/api/v2", blog) //blog posts
 
 //Error handler
 app.use(errorHandler)
