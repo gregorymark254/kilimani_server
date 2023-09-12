@@ -26,3 +26,5 @@
 20230909	15:20:26	df1cfc0c-d3c0-48e3-8e8f-3a2539deb6c2	POST	http://localhost:3000	/api/v1/login
 20230911	22:23:04	1274ed2f-3cd7-4fe4-8ab7-bdfaf8892a29	GET	undefined	/
 20230911	22:23:28	7f2495f7-4ff9-4291-a2c2-8f2edfac615c	GET	undefined	/api/v2/all
+20230912	11:47:46	59e15d97-03a1-4f2a-8e3e-67a8a8d2ba52	POST	undefined	/api/v1/register
+20230912	11:52:37	e8fdb48d-f3a1-4496-bb08-b812604730b8	POST	undefined	/api/v1/register
