@@ -11,7 +11,7 @@ router.post("/vote", async (req, res) => {
 
   // Create a votes
   const votes = new Vote({
-    votequestion: req.body.votequestion
+    votequestion: req.body.votequestion,
     text: req.body.text
   });
 
