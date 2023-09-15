@@ -6,6 +6,7 @@ const corsOption = require("./DB/corsOption")
 const mongoconnect = require("./DB/MongoDb")
 const auth = require("./Routes/auth")
 const blog = require("./Routes/blogRoute")
+const vote = require("./Routes/voteQuestion")
 const {logger } = require("./Middleware/logEvents")
 const errorHandler = require("./Middleware/errorHandler")
 
@@ -24,6 +25,7 @@ app.get("/", (req, res) => {
 });
 app.use("/api/v1", auth) //auth route
 app.use("/api/v2", blog) //blog posts
+app.use("/api/v3", vote) //vote posts
 
 //Error handler
 app.use(errorHandler)
