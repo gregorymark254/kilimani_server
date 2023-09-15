@@ -28,7 +28,7 @@ router.post("/vote", async (req, res) => {
 });
 
 //Get all votes
-router.get('/all', (req, res) =>{
+router.get('/vote/all', (req, res) =>{
   const votequestion = req.query.votequestion;
   let condition = votequestion ? { votequestion: { $regex: new RegExp(votequestion), $options: "i" } } : {};
 
