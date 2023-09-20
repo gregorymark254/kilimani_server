@@ -4,15 +4,16 @@ const Public = require("../Models/public")
 //Adding data to mongodb
 router.post("/public", async (req, res) => {
   // Validate request
-  if (!req.body.subject) {
+  if (!req.body.title) {
     res.status(400).send({ message: "Content can not be empty!" });
     return;
   }
 
   // Create a publicPost
   const publicPost = new Public({
-    subject: req.body.subject,
-    description: req.body.description
+    radio: req.body.radio,
+    title: req.body.title,
+    message: req.body.message
   });
 
   // Save publicPost in the database
@@ -30,8 +31,8 @@ router.post("/public", async (req, res) => {
 
 //Get all publicPost
 router.get('/all', (req, res) =>{
-  const subject = req.query.subject;
-  let condition = subject ? { subject: { $regex: new RegExp(subject), $options: "i" } } : {};
+  const title = req.query.title;
+  let condition = title ? { title: { $regex: new RegExp(title), $options: "i" } } : {};
 
   Public.find(condition)
     .then(data => {
