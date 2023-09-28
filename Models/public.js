@@ -7,7 +7,7 @@ const UserSchema = new mongoose.Schema(
         title : { type:String, required:true,unique:false },
         message : { type:String, required:true,unique:false }
     },
-    { timestamps : true, default: new Date() }
+    { timestamps : true }
 )
 
 module.exports = mongoose.model("Public Posts", UserSchema)

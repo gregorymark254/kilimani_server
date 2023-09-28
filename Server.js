@@ -8,6 +8,7 @@ const auth = require("./Routes/auth")
 const blog = require("./Routes/blogRoute")
 const vote = require("./Routes/voteQuestion")
 const publicPost = require("./Routes/publicRoute")
+const helpSupport = require("./Routes/helpRoute")
 const {logger } = require("./Middleware/logEvents")
 const errorHandler = require("./Middleware/errorHandler")
 
@@ -28,6 +29,7 @@ app.use("/api/v1", auth) //auth route
 app.use("/api/v2", blog) //blog posts
 app.use("/api/v3", vote) //vote posts
 app.use("/api/v4", publicPost) //public posts
+app.use("/api/v5", helpSupport) //help support posts
 
 //Error handler
 app.use(errorHandler)
