@@ -12,9 +12,9 @@ router.post("/events", async (req, res) => {
 
   // Create a event
   const event = new Events({
-    title: req.body.title,
     image: req.body.image,
     date: req.body.date,
+    title: req.body.title,
     location: req.body.location,
     about: req.body.about
   });
