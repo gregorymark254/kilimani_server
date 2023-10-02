@@ -2,9 +2,9 @@ const router = require("express").Router()
 const Events = require("../Models/events")
 
 //Adding data to mongodb
-router.post("/blog", async (req, res) => {
+router.post("/events", async (req, res) => {
   // Validate request
-  if (!req.body.image) {
+  if (!req.body.title) {
     res.status(400).send({ message: "Content can not be empty!" });
     return;
   }
@@ -26,15 +26,15 @@ router.post("/blog", async (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the Tutorial."
+          err.message || "Some error occurred while creating the events."
       });
     });
 });
 
 //Get all event
 router.get('/all', (req, res) =>{
-  const image = req.query.image;
-  let condition = image ? { image: { $regex: new RegExp(image), $options: "i" } } : {};
+  const title = req.query.title;
+  let condition = title ? { title: { $regex: new RegExp(title), $options: "i" } } : {};
 
   Events.find(condition)
     .then(data => {
