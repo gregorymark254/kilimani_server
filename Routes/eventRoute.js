@@ -14,7 +14,7 @@ router.post("/events", upload.single('image'), async (req, res) => {
 
   // Create a event
   const event = new Events({
-    image: req.body.image,
+    image: req.file.buffer,
     date: req.body.date,
     title: req.body.title,
     location: req.body.location,
