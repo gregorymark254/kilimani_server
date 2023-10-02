@@ -9,6 +9,7 @@ const blog = require("./Routes/blogRoute")
 const vote = require("./Routes/voteQuestion")
 const publicPost = require("./Routes/publicRoute")
 const helpSupport = require("./Routes/helpRoute")
+const events = require("./Routes/eventRoute")
 const {logger } = require("./Middleware/logEvents")
 const errorHandler = require("./Middleware/errorHandler")
 
@@ -30,6 +31,7 @@ app.use("/api/v2", blog) //blog posts
 app.use("/api/v3", vote) //vote posts
 app.use("/api/v4", publicPost) //public posts
 app.use("/api/v5", helpSupport) //help support posts
+app.use("/api/v6", events) //events posts
 
 //Error handler
 app.use(errorHandler)
