@@ -1,11 +1,9 @@
 const router = require("express").Router()
 const Events = require("../Models/events")
-const multer = require('multer');
-const storage = multer.memoryStorage();
-const upload = multer({ storage });
+
 
 //Adding data to mongodb
-router.post("/events", upload.single('image'), async (req, res) => {
+router.post("/events", async (req, res) => {
   // Validate request
   if (!req.body.title) {
     res.status(400).send({ message: "Content can not be empty!" });
