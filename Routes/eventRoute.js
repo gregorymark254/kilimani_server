@@ -5,7 +5,7 @@ const Events = require("../Models/events")
 //Adding data to mongodb
 router.post("/events", async (req, res) => {
   // Validate request
-  if (!req.body.title) {
+  if (!req.body.image) {
     res.status(400).send({ message: "Content can not be empty!" });
     return;
   }
@@ -34,8 +34,8 @@ router.post("/events", async (req, res) => {
 
 //Get all event
 router.get('/all', (req, res) =>{
-  const title = req.query.title;
-  let condition = title ? { title: { $regex: new RegExp(title), $options: "i" } } : {};
+  const image = req.query.image;
+  let condition = image ? { image: { $regex: new RegExp(image), $options: "i" } } : {};
 
   Events.find(condition)
     .then(data => {
