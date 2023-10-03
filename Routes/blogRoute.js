@@ -59,7 +59,7 @@ router.post("/blogs/:id", async (req, res) => {
 });
 
 // Route to get all comments for all blog posts
-router.get('/blogs/comments', async (req, res) => {
+router.get('/blogs/:id/comments', async (req, res) => {
   try {
     // Find all comments for all blog posts
     const blogs = await Blog.find().populate('comments');
@@ -71,6 +71,7 @@ router.get('/blogs/comments', async (req, res) => {
     res.status(500).json({ message: 'Error fetching comments' });
   }
 });
+
 //Get all blogs
 router.get('/all', (req, res) =>{
   const subject = req.query.subject;
