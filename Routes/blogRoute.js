@@ -32,21 +32,27 @@ router.post("/blog", async (req, res) => {
 router.post("/blogs/:id", async (req, res) => {
   const id = req.params.id;
   try {
-    const { text } = req.body;
     const blog = await Blog.findById(id);
 
     if (!blog) {
       return res.status(404).json({ message: "Blog not found" });
     }
 
-    const comment = blog.comments.id(req.params.id);
-    if (!comment) {
-      return res.status(404).json({ message: "Comment not found" });
-    }
-
-    comment.replies.push({ text });
-    const updatedBlog = await blog.save();
-    res.status(201).json(updatedBlog);
+    const comment = new Blog({
+      text: req.body.text
+    });
+  
+    // Save blogs in the database
+    comment.save(comment)
+      .then(data => {
+        res.send(data);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while creating the comment."
+        });
+      });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
