@@ -28,6 +28,30 @@ router.post("/blog", async (req, res) => {
     });
 });
 
+// POST a reply to a specific comment in a blog
+router.post("/blogs/:blogId", async (req, res) => {
+  try {
+    const { text } = req.body;
+    const blog = await Blog.findById(id);
+
+    if (!blog) {
+      return res.status(404).json({ message: "Blog not found" });
+    }
+
+    const comment = blog.comments.id(req.params.id);
+    if (!comment) {
+      return res.status(404).json({ message: "Comment not found" });
+    }
+
+    comment.replies.push({ text });
+    const updatedBlog = await blog.save();
+    res.status(201).json(updatedBlog);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+
 //Get all blogs
 router.get('/all', (req, res) =>{
   const subject = req.query.subject;
