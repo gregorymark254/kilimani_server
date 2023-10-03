@@ -30,6 +30,7 @@ router.post("/blog", async (req, res) => {
 
 // POST a reply to a specific comment in a blog
 router.post("/blogs/:id", async (req, res) => {
+  const id = req.params.id;
   try {
     const { text } = req.body;
     const blog = await Blog.findById(id);
