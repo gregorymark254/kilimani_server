@@ -71,6 +71,7 @@ router.get('/blogs/comments', async (req, res) => {
     res.status(500).json({ message: 'Error fetching comments' });
   }
 });
+
 //Get all blogs
 router.get('/all', (req, res) =>{
   const subject = req.query.subject;
