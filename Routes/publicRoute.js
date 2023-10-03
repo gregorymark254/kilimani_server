@@ -40,12 +40,12 @@ router.post("/public/:id", async (req, res) => {
       return res.status(404).json({ message: "Public not found" });
     }
 
-    if (!req.body.text) {
-      return res.status(400).json({ message: "Comment text is required" });
+    if (!req.body.reply) {
+      return res.status(400).json({ message: "Comment reply is required" });
     }
 
     const newComment = {
-      text: req.body.text,
+      reply: req.body.reply,
     };
 
     publicpost.comments.push(newComment);
