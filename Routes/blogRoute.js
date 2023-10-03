@@ -30,30 +30,33 @@ router.post("/blog", async (req, res) => {
 
 // POST a reply to a specific comment in a blog
 router.post("/blogs/:id", async (req, res) => {
-  // Validate request
-  if (!req.body.text) {
-    res.status(400).send({ message: "Content can not be empty!" });
-    return;
+  const id = req.params.id;
+
+  try {
+    const blog = await Blog.findById(id);
+
+    if (!blog) {
+      return res.status(404).json({ message: "Blog not found" });
+    }
+
+    if (!req.body.text) {
+      return res.status(400).json({ message: "Comment text is required" });
+    }
+
+    const newComment = {
+      text: req.body.text,
+    };
+
+    blog.comments.push(newComment);
+
+    // Save the updated blog with the new comment
+    const updatedBlog = await blog.save();
+
+    res.status(201).json(updatedBlog);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
-
-  // Create a blogs
-  const blogs = new Blog({
-    text: req.body.text,
-  });
-
-  // Save blogs in the database
-  blogs.save(blogs)
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while creating the Tutorial."
-      });
-    });
 });
-
 
 //Get all blogs
 router.get('/all', (req, res) =>{
