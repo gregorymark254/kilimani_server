@@ -43,7 +43,7 @@ router.post("/blogs/:id", async (req, res) => {
       text: req.body.text
     });
 
-    blog.comments.push(comment);
+    blog.push(comment);
 
     // Save the updated blog in the database
     const updatedBlog = await blog.save();
