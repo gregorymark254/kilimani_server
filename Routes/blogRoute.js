@@ -39,7 +39,7 @@ router.post("/blogs/:id/comments", async (req, res) => {
       return res.status(404).json({ message: "Blog not found" });
     }
 
-    const comment = new Comment({
+    const comment = new Blog({
       text: req.body.text
     });
 
