@@ -75,10 +75,10 @@ router.get('/public/comments', async (req, res) => {
 
 // Route to like a public post
 router.post("/publicposts/like/:id", async (req, res) => {
-  const postId = req.params.id;
+  const id = req.params.id;
 
   try {
-    const publicPost = await Public.findById(postId);
+    const publicPost = await Public.findById(id);
 
     if (!publicPost) {
       return res.status(404).json({ message: "Public post not found" });
@@ -99,10 +99,10 @@ router.post("/publicposts/like/:id", async (req, res) => {
 
 // Route to reduce a like on a public post
 router.post("/publicposts/reducelike/:id", async (req, res) => {
-  const postId = req.params.id;
+  const id = req.params.id;
 
   try {
-    const publicPost = await Public.findById(postId);
+    const publicPost = await Public.findById(id);
 
     if (!publicPost) {
       return res.status(404).json({ message: "Public post not found" });
