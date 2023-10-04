@@ -73,6 +73,59 @@ router.get('/public/comments', async (req, res) => {
   }
 });
 
+// Route to like a public post
+router.post("/publicposts/like/:id", async (req, res) => {
+  const postId = req.params.id;
+
+  try {
+    const publicPost = await Public.findById(postId);
+
+    if (!publicPost) {
+      return res.status(404).json({ message: "Public post not found" });
+    }
+
+    // Increment the likes count
+    publicPost.likes += 1;
+
+    // Save the updated public post
+    await publicPost.save();
+
+    res.json({ message: "Liked the public post", likes: publicPost.likes });
+  } catch (error) {
+    console.error("Error liking public post:", error);
+    res.status(500).json({ message: "Error liking public post" });
+  }
+});
+
+// Route to reduce a like on a public post
+router.post("/publicposts/reducelike/:id", async (req, res) => {
+  const postId = req.params.id;
+
+  try {
+    const publicPost = await Public.findById(postId);
+
+    if (!publicPost) {
+      return res.status(404).json({ message: "Public post not found" });
+    }
+
+    // Ensure likes count is greater than 0 before reducing
+    if (publicPost.likes > 0) {
+      // Reduce the likes count by 1
+      publicPost.likes -= 1;
+
+      // Save the updated public post
+      await publicPost.save();
+
+      res.json({ message: "Reduced a like on the public post", likes: publicPost.likes });
+    } else {
+      res.status(400).json({ message: "No likes to reduce" });
+    }
+  } catch (error) {
+    console.error("Error reducing like on public post:", error);
+    res.status(500).json({ message: "Error reducing like on public post" });
+  }
+});
+
 //Get all publicPost
 router.get('/all', (req, res) =>{
   const title = req.query.title;
@@ -131,7 +184,6 @@ router.post('/update/:id', (req, res) => {
       });
     });
 })
-
 
 // Deleting publicPost
 router.delete('/delete/:id', (req, res) => {
