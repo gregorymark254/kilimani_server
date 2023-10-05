@@ -59,7 +59,7 @@ router.post("/stk", generateToken , async (req,res) => {
             PartyA : `254${phone}`,    
             PartyB : shortCode,    
             PhoneNumber : `254${phone}`,    
-            CallBackURL : "https://da94-197-254-103-158.ngrok.io/api/v7/callBack",    
+            CallBackURL : "https://kilimaniserver-production.up.railway.app/api/v7/callBack",    
             AccountReference : "myaccount",    
             TransactionDesc : "Test"
         },
