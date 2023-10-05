@@ -2,8 +2,8 @@ const mongoose = require("mongoose")
 
 const MpesaSchema = new mongoose.Schema(
     {
-        number : { type: String, required: true},
-        id : { type: String, required: true},
+        phone : { type: String, required: true},
+        id : { type: String, required: false},
         amount : { type: String, required: true}
     },
     { timestamps : true }
