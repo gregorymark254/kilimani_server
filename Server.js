@@ -11,6 +11,7 @@ const publicPost = require("./Routes/publicRoute")
 const helpSupport = require("./Routes/helpRoute")
 const mpesa = require("./Routes/Mpesa")
 const events = require("./Routes/eventRoute")
+const noise = require("./Routes/noise")
 const {logger } = require("./Middleware/logEvents")
 const errorHandler = require("./Middleware/errorHandler")
 
@@ -36,6 +37,7 @@ app.use("/api/v4", publicPost) //public posts
 app.use("/api/v5", helpSupport) //help support posts
 app.use("/api/v6", events) //events posts
 app.use("/api/v7", mpesa) //mpesa payment route
+app.use("/api/v8", noise) //noise route
 
 //Error handler
 app.use(errorHandler)
