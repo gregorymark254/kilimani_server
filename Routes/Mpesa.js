@@ -19,14 +19,14 @@ const generateToken = async (req, res, next) => {
         }
     })
     .then((response) => {
-        // console.log(response)
+        console.log(response.data.access_token)
         token = response.data.access_token
-        next()
+        next();
     })
     .catch((err) => {
         console.log(err)
         console.log("error one")
-        res.status(400).json(err.message)
+        // res.status(400).json(err.message)
     })
 }
   
@@ -59,7 +59,7 @@ router.post("/stk", generateToken , async (req,res) => {
             PartyA : `254${phone}`,    
             PartyB : shortCode,    
             PhoneNumber : `254${phone}`,    
-            CallBackURL : "https://kilimaniserver-production.up.railway.app/api/v7/callBack",    
+            CallBackURL : "https://da94-197-254-103-158.ngrok.io/api/v7/callBack",    
             AccountReference : "myaccount",    
             TransactionDesc : "Test"
         },
@@ -80,37 +80,46 @@ router.post("/stk", generateToken , async (req,res) => {
 
 
 //callback url
-router.post("/callBack" , (req,res) => {
-
-    const callbackData = req.body
-    console.log(callbackData)
-    if (!callbackData.Body.stkCallback.CallbackMetadata) {
-        console.log(callbackData.Body)
-        return res.status(200).json("OK")
+router.post("/callBack", async (req, res) => {
+    try {
+      const callbackData = req.body;
+      console.log(callbackData);
+  
+      if (!callbackData.Body || !callbackData.Body.stkCallback) {
+        console.log("Invalid callback data");
+        return res.status(400).json("Invalid callback data");
+      }
+  
+      const callbackMetadata = callbackData.Body.stkCallback.CallbackMetadata;
+  
+      if (!callbackMetadata) {
+        console.log("No callback metadata found");
+        return res.status(400).json("No callback metadata found");
+      }
+  
+      // Extract transaction details from callback data
+      const id = callbackMetadata.Item[3].Value;
+      const phone = callbackMetadata.Item[4].Value;
+      const amount = callbackMetadata.Item[0].Value;
+  
+      console.log({ id, phone, amount });
+  
+      // Create a new MpesaPayments instance and save it to the database
+      const payment = new mpesaPayments({
+        number: phone,
+        amount,
+        id,
+      });
+  
+      const savedPayment = await payment.save();
+      console.log("----- TRANSACTION SAVED SUCCESSFULLY -----", savedPayment);
+  
+      // Respond with a success message
+      res.status(200).json({ message: "Transaction saved successfully" });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal Server Error" });
     }
-    console.log(callbackData.Body.stkCallback.CallbackMetadata)
-    res.status(200)
-
-    const id = callbackData.Body.stkCallback.CallbackMetadata.Item[3].Value
-    const phone = callbackData.Body.stkCallback.CallbackMetadata.Item[4].Value
-    const amount = callbackData.Body.stkCallback.CallbackMetadata.Item[0].Value
-
-    console.log({id,phone,amount})
-
-    const payment = new mpesaPayments()
-
-    payment.number = phone
-    payment.amount = amount
-    payment.id = id
-
-    payment.save()
-    .then((data) => {
-        console.log({message : "-----TRANSACTION SAVED SUCCESSFULLY-----", data})
-    })
-    .catch((err) => {
-        console.log(err.message)
-    })
-
-})
+  });
 
 module.exports = router

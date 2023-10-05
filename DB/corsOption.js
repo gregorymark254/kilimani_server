@@ -2,7 +2,8 @@
 const allowedOrigins = [
     'http://localhost:3000',
     'http://localhost:3001',
-    'https://kilimanihub.vercel.app'
+    'https://kilimanihub.vercel.app',
+    'https://4c28-197-254-103-158.ngrok.io'
 ]
 
 const corsOption = {
