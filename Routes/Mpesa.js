@@ -19,7 +19,7 @@ const generateToken = async (req, res, next) => {
         }
     })
     .then((response) => {
-        console.log(response.data.access_token)
+        // console.log(response.data.access_token)
         token = response.data.access_token
         next();
     })
@@ -59,7 +59,7 @@ router.post("/stk", generateToken , async (req,res) => {
             PartyA : `254${phone}`,    
             PartyB : shortCode,    
             PhoneNumber : `254${phone}`,    
-            CallBackURL : "https://kilimaniserver-production.up.railway.app/api/v7/callBack",    
+            CallBackURL : "https://577e-197-254-103-158.ngrok.io/api/v7/callBack",    
             AccountReference : "myaccount",    
             TransactionDesc : "Test"
         },

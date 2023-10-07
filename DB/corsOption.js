@@ -1,9 +1,10 @@
 //cross origin resourse sharing
 const allowedOrigins = [
     'http://localhost:3000',
+    'http://localhost:4000',
     'http://localhost:3001',
     'https://kilimanihub.vercel.app',
-    'https://4c28-197-254-103-158.ngrok.io'
+    'https://577e-197-254-103-158.ngrok.io'
 ]
 
 const corsOption = {
