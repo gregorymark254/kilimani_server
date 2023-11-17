@@ -66,7 +66,7 @@ router.post('/login', async (req, res) => {
         {
           userInfo: {
             email: email,
-            isAdmin:,
+            isAdmin
           },
         },
         process.env.ACCESS_TOKEN_SECRET,
