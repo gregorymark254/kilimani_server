@@ -46,7 +46,7 @@ router.post('/login', async (req, res) => {
     const { email, password } = req.body;
     
     if (!email || !password) {
-      return res.status(400).json({ message: 'Username and password are required.' });
+      return res.status(400).json({ message: 'Email and password are required.' });
     }
 
     const foundUser = await User.findOne({ email }).exec();
@@ -55,7 +55,7 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ message: 'Invalid email or password.' });
     }
 
-    // Evaluate password
+    // Compare hashed password
     const match = await bcrypt.compare(password, foundUser.password);
 
     if (match) {
@@ -64,23 +64,23 @@ router.post('/login', async (req, res) => {
       // Create JWTs
       const accessToken = jwt.sign(
         {
-          UserInfo: {
+          userInfo: {
             email: email,
-            isAdmin,
+            isAdmin:,
           },
         },
         process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn: '1h' } // Increase expiration time if needed
+        { expiresIn: '1h' }
       );
 
-      const newRefreshToken = jwt.sign(
+      const refreshToken = jwt.sign(
         { email },
         process.env.REFRESH_TOKEN_SECRET,
-        { expiresIn: '24h' } // Increase expiration time if needed
+        { expiresIn: '24h' }
       );
 
-      // Saving refreshToken with the current user
-      foundUser.refreshToken = newRefreshToken;
+      // Save refreshToken with the current user
+      foundUser.refreshToken = refreshToken;
 
       try {
         await foundUser.save();
@@ -96,9 +96,10 @@ router.post('/login', async (req, res) => {
     }
   } catch (error) {
     console.error(error);
-    res.sendStatus(500);
+    res.status(500).json({ message: 'Internal server error.' });
   }
 });
+
 
 
 //Getting all User accounts from mongo db
