@@ -4,7 +4,7 @@ const allowedOrigins = [
     'http://localhost:4000',
     'http://localhost:3001',
     'https://kilimanihub.vercel.app',
-    'https://577e-197-254-103-158.ngrok.io'
+    'https://3cfa-105-160-21-36.ngrok.io'
 ]
 
 const corsOption = {

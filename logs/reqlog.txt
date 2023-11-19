@@ -109,3 +109,6 @@
 20231006	09:18:47	0ca1ac02-244e-4b15-a27d-97a78c3a6b3b	POST	http://localhost:3000	/api/v7/stk
 20231006	09:20:19	75607c12-66c4-4848-a911-3b578942f5af	POST	undefined	/api/v7/stk
 20231117	23:37:55	455d51ea-8694-455e-a9a9-ad2dda4f0761	POST	http://localhost:3000	/api/v1/login
+20231117	23:39:50	bd10c055-7f6b-46aa-85f7-6f1f07d7086a	GET	http://localhost:3000	/api/v2/all
+20231117	23:39:50	b4f88a33-2dc2-4045-94a1-05cf92d38d60	GET	http://localhost:3000	/api/v2/all
+20231118	09:52:16	7a2cf52e-f3bb-4239-9c06-725b5ab5be5b	POST	http://localhost:3000	/api/v7/stk
