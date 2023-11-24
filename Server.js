@@ -20,7 +20,7 @@ mongoconnect()
 // const db = require("./Models/index");
 // db.sequelize.sync();
 
-//middleware
+//m
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); 
 app.use(cors(corsOption))
